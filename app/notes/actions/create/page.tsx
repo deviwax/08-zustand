@@ -1,5 +1,5 @@
 import CreateNoteClient from './CreateNoteClient';
-import { createNoteAction } from './action';
+import { createNoteAction } from '../action';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useNoteStore } from '@/lib/noteStore';
+import { useNoteStore } from '@/lib/store/noteStore';
 import css from './NoteForm.module.css';
 
 export default function NoteForm({ onClose, action }: { onClose: () => void; action: (formData: FormData) => Promise<void> }) {
