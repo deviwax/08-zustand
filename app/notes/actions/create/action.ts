@@ -1,4 +1,5 @@
 'use server';
+
 import { revalidatePath } from 'next/cache';
 import { createNote } from '@/lib/api';
 
@@ -8,7 +9,7 @@ export async function createNoteAction(formData: FormData) {
     content: formData.get('content') as string,
     tag: formData.get('tag') as string,
   };
-
+    
   await createNote(data);
   revalidatePath('/notes');
 }
