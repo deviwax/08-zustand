@@ -1,5 +1,7 @@
+import { useRouter } from 'next/navigation';
 import NoteForm from '@/components/NoteForm/NoteForm';
 import css from './page.module.css';
+import { createNoteAction } from './action';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -15,11 +17,13 @@ export const metadata = {
 };
 
 export default function CreateNote() {
+  const router = useRouter();
+
   return (
     <main className={css.main}>
       <div className={css.container}>
         <h1 className={css.title}>Create note</h1>
-        < NoteForm onClose={close} />
+        <NoteForm onClose={() => router.back()} action={createNoteAction} />
       </div>
     </main>
   );

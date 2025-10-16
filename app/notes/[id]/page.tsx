@@ -1,25 +1,48 @@
-'use client';
-
-import React, { use } from 'react';
-import NoteModal from '@/components/NoteModal';
 import { fetchNoteById } from '@/lib/api';
+import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  return <NoteModal id={id} />;
-}
-
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export default async function NoteDetailsPage({ params }: { params: { id: string } }) {
   const note = await fetchNoteById(params.id);
 
+  if (!note) return notFound();
+
+  return (
+    <main style={{ padding: '2rem' }}>
+      <h1>{note.title}</h1>
+      <p>{note.content}</p>
+      <p>
+        <strong>Tag:</strong> {note.tag}
+      </p>
+    </main>
+  );
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const note = await fetchNoteById(params.id);
+
+  if (!note) {
+    return {
+      title: 'Note not found - NoteHub',
+      description: 'The requested note does not exist.',
+      openGraph: {
+        title: 'Note not found - NoteHub',
+        description: 'The requested note does not exist.',
+        url: `${API_URL}/notes/${params.id}`,
+        images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+      },
+    };
+  }
+
   return {
-    title: `NoteHub - Note: ${note.title}`,
-    description: note.content.slice(0, 160),
+    title: `NoteHub - ${note.title}`,
+    description: note.content?.slice(0, 160) || 'Note detail',
     openGraph: {
-      title: `NoteHub - Note: ${note.title}`,
-      description: note.content.slice(0, 160),
-      url: `https://your-site-url.com/notes/${params.id}`,
+      title: `NoteHub - ${note.title}`,
+      description: note.content?.slice(0, 160) || 'Note detail',
+      url: `${API_URL}/notes/${params.id}`,
       images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
     },
   };
