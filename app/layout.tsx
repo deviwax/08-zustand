@@ -1,0 +1,50 @@
+import './globals.css';
+import TanStackProvider from '../components/TanStackProvider/TanStackProvider';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
+import css from '@/components/LayoutNotes/LayoutNotes.module.css';
+import { Roboto } from 'next/font/google';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const roboto = Roboto({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto',
+});
+
+export const metadata = {
+  title: 'NoteHub - Your notes app',
+  description: 'NoteHub - Keep your notes organized and accessible',
+  openGraph: {
+    title: 'NoteHub - Your notes app',
+    description: 'NoteHub - Keep your notes organized and accessible',
+    url: `${API_URL}`,
+    images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+  },
+};
+
+interface RootLayoutProps {
+  children: React.ReactNode;
+  modal?: React.ReactNode;
+}
+
+export default function RootLayout({ children, modal }: RootLayoutProps) {
+  return (
+    <html lang="en" className={roboto.variable}>
+      <body>
+        <TanStackProvider>
+          <div className={css.container}>
+            <Header />
+            <main className={css.main}>
+              {children}
+              {modal}
+            </main>
+            <Footer />
+          </div>
+        </TanStackProvider>
+      </body>
+    </html>
+  );
+}
