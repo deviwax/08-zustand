@@ -1,4 +1,5 @@
 import css from './page.module.css';
+import type { Metadata } from 'next';
 
 export default function NotFound() {
   return (
@@ -9,7 +10,7 @@ export default function NotFound() {
   );
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'NoteHub - Page Not Found',
   description: 'Sorry, the page you are looking for does not exist.',
   openGraph: {

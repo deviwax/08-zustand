@@ -1,11 +1,12 @@
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { fetchNotes, NotesResponse } from '@/lib/api';
 import NotesClient from './Notes.client';
+import type { Metadata } from 'next';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 interface Props {
-  params: Promise<{ slug: string[] }>;
+  params: { slug: string[] };
 }
 
 export default async function NotesPage({ params }: Props) {
@@ -28,17 +29,17 @@ export default async function NotesPage({ params }: Props) {
   );
 }
 
-export async function generateMetadata({ params }: { params: { slug: string[] } }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tag = params.slug.length ? params.slug[0] : 'All';
 
-  return {
-    title: `NoteHub - Notes Filtered by ${tag}`,
-    description: `Viewing notes filtered by ${tag} tag`,
-    openGraph: {
+    return {
       title: `NoteHub - Notes Filtered by ${tag}`,
       description: `Viewing notes filtered by ${tag} tag`,
-      url: `${API_URL}/notes/filter/${tag}`,
-      images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
-    },
-  };
-}
+      openGraph: {
+        title: `NoteHub - Notes Filtered by ${tag}`,
+        description: `Viewing notes filtered by ${tag} tag`,
+        url: `${API_URL}/notes/filter/${tag}`,
+        images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+      },
+    };
+  }

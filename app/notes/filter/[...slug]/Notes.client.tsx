@@ -8,6 +8,7 @@ import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import Link from 'next/link';
 import { Note } from '@/types/note';
+import React from 'react';
 
 interface NotesClientProps {
   tag: string;
@@ -49,8 +50,10 @@ export default function NotesClient({ tag }: NotesClientProps) {
         </Link>
       </div>
 
+      {notes.length > 0 ? (
       <NoteList notes={notes} />
-
+      ) : (<p>No notes found</p>)}
+      
       {totalPages > 1 && (
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
       )}

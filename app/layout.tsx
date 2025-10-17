@@ -4,6 +4,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import css from '@/components/LayoutNotes/LayoutNotes.module.css';
 import { Roboto } from 'next/font/google';
+import type { Metadata } from 'next';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -14,7 +15,7 @@ const roboto = Roboto({
   variable: '--font-roboto',
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'NoteHub - Your notes app',
   description: 'NoteHub - Keep your notes organized and accessible',
   openGraph: {
