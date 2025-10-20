@@ -22,7 +22,11 @@ export const metadata: Metadata = {
     title: 'NoteHub - Your notes app',
     description: 'NoteHub - Keep your notes organized and accessible',
     url: `${API_URL}`,
-    images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+    images: [
+      {
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'
+      }
+    ],
   },
 };
 
