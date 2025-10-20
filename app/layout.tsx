@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: `${API_URL}`,
     images: [
       {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
       }
     ],
   },
