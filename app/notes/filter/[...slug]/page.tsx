@@ -3,14 +3,14 @@ import { fetchNotes, NotesResponse } from '@/lib/api';
 import NotesClient from './Notes.client';
 import type { Metadata } from 'next';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const SITE_URL = 'https://notehub.goit.global';
 
 interface Props {
   params: { slug: string[] };
 }
 
 export default async function NotesPage({ params }: Props) {
-    const { slug } = await params;
+    const { slug } = params;
     const tag = slug.length > 0 ? slug[0] : 'All';
 
     const queryClient = new QueryClient();
@@ -38,8 +38,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: `NoteHub - Notes Filtered by ${tag}`,
         description: `Viewing notes filtered by ${tag} tag`,
-        url: `${API_URL}/notes/filter/${tag}`,
-        images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+        url: `${SITE_URL}/notes/filter/${tag}`,
+        images: [
+          {
+            url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'
+          },
+        ],
       },
     };
   }

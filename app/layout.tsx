@@ -6,7 +6,7 @@ import css from '@/components/LayoutNotes/LayoutNotes.module.css';
 import { Roboto } from 'next/font/google';
 import type { Metadata } from 'next';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const SITE_URL = 'https://notehub.goit.global';
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NoteHub - Your notes app',
     description: 'NoteHub - Keep your notes organized and accessible',
-    url: `${API_URL}`,
+    url: SITE_URL,
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
